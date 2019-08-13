@@ -32,7 +32,7 @@ class Advertise_RelatedProducts_Block_Related extends Mage_Catalog_Block_Product
         array_push($ids, '0');
 
         // Get count of related products required
-        $relatedCount = Mage::getStoreConfig('advertise_relatedproducts_options/advertise_related_products/advertise_prod_count');
+        $relatedCount = Mage::getStoreConfig('advertise_suggestedproducts_options/advertise_suggested_products/advertise_related_prod_count');
 
         // Get collection of products
         $relateds = Mage::getResourceModel('catalog/product_collection');
