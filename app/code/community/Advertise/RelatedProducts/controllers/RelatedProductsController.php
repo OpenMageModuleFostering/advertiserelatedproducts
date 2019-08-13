@@ -8,15 +8,6 @@ class Advertise_RelatedProducts_RelatedProductsController extends Mage_Core_Cont
     {
         $this->loadLayout();
         $this->_title($this->__("Adverti.se Related Products"));
-
-        //$this->_addContent($this->getLayout()->createBlock('relatedproducts'));
-        $block = $this->getLayout()->createBlock(
-                        'Mage_Core_Block_Template',
-                        'relatedproducts',
-                        array('template' => 'advertise/relatedproducts.phtml')
-        );
-        $this->getLayout()->getBlock('content')->append($block);
-
         $this->renderLayout();
     }
 

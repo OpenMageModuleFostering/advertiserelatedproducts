@@ -125,6 +125,11 @@ class Advertise_RelatedProducts_Block_Related extends Mage_Catalog_Block_Product
         if ($id) {
             $toexclude[] = $id;
         }
+        // Don't include basket items as related products
+        $session = Mage::getSingleton('checkout/session');
+        foreach ($session->getQuote()->getAllVisibleItems() as $item) {
+            $toexclude[] = $item->getProductId();
+        }
         $randCollection->addIdFilter($toexclude, true);
         foreach($randCollection as $randProduct)
         {

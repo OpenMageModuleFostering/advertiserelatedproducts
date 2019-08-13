@@ -1,13 +1,5 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-    <!-- Override the default related.phtml -->
-    <advertise_relatedproducts_catalog_index>
-        <reference name="catalog.product.related">
-            <action method="setTemplate">
-                <template>advertise_relatedproducts/related.phtml</template>
-            </action>
-        </reference>
-    </advertise_relatedproducts_catalog_index>
 
     <!-- Add Adverti.se scripts and css to head of product pages (handle for product pages is 'catalog_product_view') -->
     <catalog_product_view>
@@ -20,16 +12,16 @@
             </block>
 
             <!-- Adverti.se JavaScript for related products -->
-            <block type="core/text" name="adverti.se.relatedproducts.js">
+            <block type="core/text" name="adverti.se.retailintelligence.js">
                 <action method="setText">
-                    <text><![CDATA[<script type="text/javascript" src="http://retail.adverti.se/js/relatedproducts-1_0_0.js"></script>]]></text>
+                    <text><![CDATA[<script type="text/javascript" src="http://retail.adverti.se/js/retailintelligence-1_0_0.js"></script>]]></text>
                 </action>
             </block>
 
             <!-- Adverti.se CSS for related products -->
-            <block type="core/text" name="adverti.se.relatedproducts.css">
+            <block type="core/text" name="adverti.se.retailintelligence.css">
                 <action method="setText">
-                    <text><![CDATA[<link rel="stylesheet" type="text/css" href="http://retail.adverti.se/css/relatedproducts.css" media="all" />]]></text>
+                    <text><![CDATA[<link rel="stylesheet" type="text/css" href="http://retail.adverti.se/css/retailintelligence-1_0_0.css" media="all" />]]></text>
                 </action>
             </block>
         </reference>
