@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**
+ * @category   Advertise
+ * @package    Advertise_RelatedProducts
+ */
+-->
+
+<config>
+     <modules>
+        <Advertise_RelatedProducts>
+            <active>true</active>
+            <codePool>community</codePool>
+            <version>1.0.1</version>
+        </Advertise_RelatedProducts>
+     </modules>
+</config>

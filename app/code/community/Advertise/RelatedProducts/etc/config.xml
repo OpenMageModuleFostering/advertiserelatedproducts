@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- Define module and version number-->
+    <modules>
+        <Advertise_RelatedProducts>
+            <version>1.0.1</version>
+        </Advertise_RelatedProducts>
+    </modules>
+
+    <!-- Default values for Module Configuration -->
+    <default>
+        <advertise_relatedproducts_options>
+            <advertise_related_products>
+                <advertise_prod_count>4</advertise_prod_count>
+                <advertise_upsell_text>Related Products</advertise_upsell_text>
+            </advertise_related_products>
+        </advertise_relatedproducts_options>
+    </default>
+
+    <admin>
+        <routers>
+            <relatedproducts>
+                <use>admin</use>
+                <args>
+                    <module>Advertise_RelatedProducts</module>
+                    <frontName>advertise</frontName>
+                </args>
+            </relatedproducts>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <!-- Add menu to "Config" drop-down
+        <menu>
+            <catalog>
+                <children>
+                    <relatedproducts module="advertise_relatedproducts">
+                        <title>Adverti.se Related Products</title>
+                        <sort_order>201</sort_order>
+                        <action>advertise/relatedproducts</action>
+                    </relatedproducts>
+                </children>
+            </catalog>
+        </menu>
+        -->
+
+        <!-- Add Advertise settings section to ACL -->
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <!-- Specific to this Adverti.se module -->
+                                        <advertise_relatedproducts_options>
+                                            <title>Adverti.se Related Products Module Section</title>
+                                            <sort_order>3</sort_order>
+                                        </advertise_relatedproducts_options>
+
+                                        <!-- These two are for the general Adverti.se settings & license -->
+                                        <advertise_settings translate="title">
+                                            <title>Advertise Section</title>
+                                            <sort_order>1</sort_order>
+                                        </advertise_settings>
+                                        <advertise translate="title">
+                                            <title>Advertise</title>
+                                            <sort_order>2</sort_order>
+                                        </advertise>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <global>
+        <!-- Define setup resources to run on install e.g. run SQL and data scripts -->
+        <resources>
+            <relatedproducts_setup>
+                <setup>
+                    <module>Advertise_RelatedProducts</module>
+                    <class>Advertise_RelatedProducts_Model_Resource_Setup</class>
+                </setup>
+            </relatedproducts_setup>
+        </resources>
+
+        <!-- Redirect calls to core Mage_Catalog_Block_Product_List_Related with Advertise related product list -->
+        <blocks>
+            <catalog>
+                <rewrite>
+                    <product_list_related>Advertise_RelatedProducts_Block_Related</product_list_related>
+                </rewrite>
+            </catalog>
+        </blocks>
+
+        <!-- Set Helper class -->
+        <helpers>
+            <advertise_relatedproducts>
+                <class>Advertise_RelatedProducts_Helper</class>
+            </advertise_relatedproducts>
+        </helpers>
+
+        <!-- Set necessary Models -->
+        <models>
+            <relatedproducts>
+                <class>Advertise_RelatedProducts_Model</class>
+            </relatedproducts>
+        </models>
+    </global>
+
+    <frontend>
+        <routers>
+            <!-- the <relatedproducts> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <relatedproducts>
+                <use>standard</use>
+                <args>
+                    <module>Advertise_RelatedProducts</module>
+                    <frontName>relatedproducts</frontName>
+                </args>
+            </relatedproducts>
+        </routers>
+
+        <!-- Add to default page layout -->
+        <layout>
+             <updates>
+                  <relatedproducts>
+                        <file>advertiserelatedproducts.xml</file>
+                  </relatedproducts>
+             </updates>
+        </layout>
+
+    </frontend>
+
+</config>
+
