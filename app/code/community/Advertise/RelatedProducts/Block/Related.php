@@ -108,12 +108,31 @@ class Advertise_RelatedProducts_Block_Related extends Mage_Catalog_Block_Product
         // Still haven't got the required number of related products so fill up with random products
         $numRandomsToGet = $relatedCount - count($this->_itemCollection);
 
-        // Get random products
+        // Get a list of 100 random product IDs
+        // (To execute SQL query directly: 1. Get the resource model, 2. Retrieve the read connection, 3. Execute the query)
+        $resource = Mage::getSingleton('core/resource');
+        $readConnection = $resource->getConnection('core_read');
+        $query = 'SELECT MAX(entity_id) AS maxid FROM ' . $resource->getTableName('catalog/product');
+        $maxid = $readConnection->fetchOne($query);
+        if (!$maxid) {
+            $maxid = $prodid;
+        }
+        $randids = array();
+        for ($i = 0; $i <= 100; $i++) {
+            array_push($randids , rand(1,$maxid));
+        }
+
+        // Select random products
+        // DO NOT USE $randCollection->getSelect()->order('rand()');
+        // AS VERY INEFFICIENT; TOO LONG FOR LARGE PRODUCT COLLECTIONS
         $randCollection = Mage::getResourceModel('catalog/product_collection');
         Mage::getModel('catalog/layer')->prepareProductCollection($randCollection);
-        $randCollection->getSelect()->order('rand()');
+        // Select from the 100 random IDs
+        $randCollection->addIdFilter($randids, false);
         $randCollection->addStoreFilter();
-        $randCollection->setPage(1, $numRandomsToGet);
+        $randCollection->getSelect()->limit($numRandomsToGet);
+        //$randCollection->setPage(1, $numRandomsToGet);
+
         // Don't get items we already have
         $exclude = $this->_itemCollection->getAllIds();
         $toexclude = array();
@@ -131,6 +150,7 @@ class Advertise_RelatedProducts_Block_Related extends Mage_Catalog_Block_Product
             $toexclude[] = $item->getProductId();
         }
         $randCollection->addIdFilter($toexclude, true);
+        // Mage::log('RANDOM RELATED ITEM SELECT QUERY:' . $randCollection->getSelect());
         foreach($randCollection as $randProduct)
         {
             $this->_itemCollection->addItem($randProduct);
