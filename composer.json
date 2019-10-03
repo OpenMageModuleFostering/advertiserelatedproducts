@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/AdvertiseRelatedProducts",
+    "name": "openmage-module-fostering\/advertiserelatedproducts",
     "type": "magento-module",
-    "license": "OSL",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Adverti.se Related Products for Magento - Dynamically Updated and Individually Personalised",
     "authors": [
